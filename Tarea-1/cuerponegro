@@ -1,0 +1,37 @@
+#!/usr/bin/gnuplot
+
+#Problema de la radiación del cuerpo negro
+#Se grafica la formula de radiacion de Planck para 3 temperaturas diferentes de
+#un cuerpo negro con el graficador Gnuplot
+
+set terminal wxt persist
+
+#Se definen las constantes
+
+
+c= 3e8  #Velocidad de la Luz (m/s)
+h= 6.62607e-34   #Constante de Planck [(kg*m**2)/s]
+k= 1.38064e-23   #Constante de Boltzmann (kg*m**2/s**2K)
+T1= 5000  #Temperatura del cuerpo (K)
+T2= 4000
+T3=3000
+
+#Num= 8*pi*h*c
+#Den= x**5*exp(h*c/x*k*T)-1
+
+u1(x) = ( 8 * pi * h * c ) / ( x**5 * exp( (h * c) / (x * k * T1) -1 ) ) #Ecuación a Graficar
+
+u2(x) = ( 8 * pi * h * c ) / ( x**5 * exp( (h * c) / (x * k * T2) -1 ) )
+
+u3(x) = ( 8 * pi * h * c ) / ( x**5 * exp( (h * c) / (x * k * T3) -1 ) )
+
+set yrange [0:1500000]
+set xrange [0:0.000003]
+
+set title "Radiación de Planck"
+
+set ylabel "u(x)    (J/m3m)"
+set xlabel "x (Longitud de Onda) (m)"
+
+plot u1(x), u2(x), u3(x)
+
